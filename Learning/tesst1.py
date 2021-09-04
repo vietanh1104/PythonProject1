@@ -1,7 +1,7 @@
 import numpy as np
 import csv
-
-
+import warnings
+warnings.filterwarnings("ignore")
 arr=[]
 filename="Iris.csv"
 file_reader = csv.reader(open(filename, 'r'), delimiter=',')
@@ -16,7 +16,7 @@ def InitKmeans(n_clus=3, X=arr):
   means = np.zeros((n_clus, X.shape[1]))
   for i in range(n_clus):
     for j in range(X.shape[-1]):
-      means[i][j] = np.random.uniform(amin[j]+0.3, amax[j])
+      means[i][j] = np.random.uniform(amin[j], amax[j])
   return means
 
 
@@ -57,7 +57,6 @@ def fit(n_clus, X, epouch):
 
 def Distance(vecto1,vecto2):
   return np.sum(np.sqrt((vecto1-vecto2)**2))
-
 def Clusting(X, means):
   store = [[] for i in range(len(means))]
   for i in range(len(X)):
@@ -87,12 +86,12 @@ def fit(nClus, X, epouch):
     means = Update(store)
 
   return means
-my_kmeans= fit(3,arr,1500)
+my_kmeans= fit(3,arr,50)
 
 from sklearn.cluster import KMeans
-Clusting=KMeans(3)
-res=Clusting.fit(arr).cluster_centers_
+clusting=KMeans(3)
+res=clusting.fit(arr).cluster_centers_
 
 for i in range(3):
-  print np.sum(np.sqrt((res[i]-my_kmeans[i])**2))
+  print( np.sum(np.sqrt((res[i]-my_kmeans[i])*2)))
 
