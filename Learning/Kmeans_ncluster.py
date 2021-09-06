@@ -8,6 +8,7 @@ file_reader = csv.reader(open(filename, 'r'), delimiter=',')
 for row in file_reader:
   arr.append(row[1:5])
 
+feature_names = arr[0]
 arr=np.array(arr[1:]).astype(np.float)
 
 
@@ -50,7 +51,7 @@ newcentroid=np.array(fit(3,arr,3))
 
 res=[]
 for i in range(4):
-    x=float(input())
+    x=float(input(feature_names[i]+"="))
     res.append(x)
 res = np.array(res)
 
@@ -65,4 +66,4 @@ for i in range(3):
         Distance_min=d
         pos=i
 
-print(type_of_flower[pos])
+print(str("Species:")+type_of_flower[pos])
