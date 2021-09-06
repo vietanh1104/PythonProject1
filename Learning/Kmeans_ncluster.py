@@ -8,7 +8,7 @@ file_reader = csv.reader(open(filename, 'r'), delimiter=',')
 for row in file_reader:
   arr.append(row[1:5])
 
-feature_names = arr[0]
+
 arr=np.array(arr[1:]).astype(np.float)
 
 
@@ -47,23 +47,5 @@ def fit(n_cluster,X,epouch):
         newCentroid=Update(store)
     return newCentroid
 
-newcentroid=np.array(fit(3,arr,3))
+newcentroid=np.array(fit(3,arr,100))
 
-res=[]
-for i in range(4):
-    x=float(input(feature_names[i]+"="))
-    res.append(x)
-res = np.array(res)
-
-
-type_of_flower=(["Iris-setosa","Iris-versicolor","Iris-virginica"])
-pos = -1
-Distance_min = 0x3f3f3f3f3f
-
-for i in range(3):
-    d=Distance(res,newcentroid[i])
-    if d<Distance_min:
-        Distance_min=d
-        pos=i
-
-print(str("Species:")+type_of_flower[pos])
